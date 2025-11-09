@@ -1,0 +1,54 @@
+CPU     = msp430g2553
+
+CC      = msp430-elf-gcc
+
+
+
+CFLAGS  = -mmcu=$(CPU) -Os -I./timerLib -Wall -Wextra
+
+LDFLAGS = -mmcu=$(CPU)
+
+
+
+TARGET  = toy.elf
+
+OBJS    = main.o asm_helpers.o timerLib/clocksTimer.o timerLib/sr.o
+
+
+
+all: $(TARGET)
+
+
+
+$(TARGET): $(OBJS)
+
+	$(CC) $(LDFLAGS) -o $@ $^
+
+
+
+%.o: %.c
+
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+
+
+%.o: %.s
+
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+
+
+load: $(TARGET)
+
+	msp430loader.sh $(TARGET)
+
+
+
+clean:
+
+	rm -f $(OBJS) $(TARGET)
+
+
+
+.PHONY: all load clean
+
