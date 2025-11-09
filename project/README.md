@@ -9,4 +9,4 @@ State Machine:
 Each button press changes the current mode(red, green, both, or sound)
 The LEDs and buzzer react according to the active state.
 
-The LEDs automatically dim and brighten in smooth steps over time,
+The LEDs dim when button 4 (the sound button) is pressed and brighten in smooth steps over time,
